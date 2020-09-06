@@ -36,7 +36,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      
+      "no-mixed-spaces-and-tabs": "off"
     }
   },
   "browserslist": [

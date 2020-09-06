@@ -24,6 +24,9 @@
               <!-- <a class="nav-link" href="#">Link</a> -->
               <router-link to="/exercise" class="nav-link">Exercise</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/user/2" class="nav-link">User</router-link>
+            </li>
           </ul>
         </div>
       </div>

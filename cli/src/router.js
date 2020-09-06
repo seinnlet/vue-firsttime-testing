@@ -8,6 +8,10 @@ Vue.use(VueRouter)
 // new router
 import Testing from './components/Testing.vue'
 import Exercise from './components/Exercise.vue'
+
+// dynamic route test
+import User from "./components/User.vue";
+
 const router = new VueRouter({
 	routes: [
 		{
@@ -17,9 +21,13 @@ const router = new VueRouter({
 		{
 			path: '/exercise', 
 			component: Exercise
+		}, 
+		{
+			path: '/user/:id', 
+			component: User
 		}
 	],
-	mode: 'abstract',	// history
+	mode: 'history',	// abstract
   linkActiveClass: "active", // active class for non-exact links.
   linkExactActiveClass: "active"
 })
