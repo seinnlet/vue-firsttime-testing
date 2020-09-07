@@ -19,3 +19,13 @@ Vue CLI
 	- template
 	- script
 	- style
+
+=> UI 
+	- bootstrap-vue.org
+
+=> route 
+	- router.vuejs.org
+
+=> directory
+	- views
+		- .vue
