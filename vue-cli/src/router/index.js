@@ -9,6 +9,7 @@ import Home from "../views/Home.vue";
 import News from "../views/News.vue";
 import Items from "../views/Items.vue";
 import Itemdetail from "../views/ItemDetail.vue";
+import ShoppingCart from "../views/ShoppingCart.vue";
 
 // bootstrap & css
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -29,18 +30,23 @@ const routes = [
   }, 
   {
     path: "/news", 
-    name: "News", 
+    name: "new-list", 
     component: News
   }, 
   {
     path: "/items", 
-    name: "Items", 
+    name: "item-list", 
     component: Items
   },
   { 
-    path: '/items/:id',
-    name: 'ItemDetail',
+    path: '/item/:id',
+    name: 'item-detail',
     component: Itemdetail
+  },
+  { 
+    path: '/cart',
+    name: 'cart',
+    component: ShoppingCart
   }
 ];
 
@@ -48,7 +54,6 @@ const router = new VueRouter({
   routes,
   mode: 'history',  // abstract
   linkActiveClass: "active", // active class for non-exact links.
-  // linkExactActiveClass: "active"
 });
 
 export default router;

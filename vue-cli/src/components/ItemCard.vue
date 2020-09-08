@@ -1,6 +1,6 @@
 <template>
   <div class="card border-0 shadow div-product">
-    <router-link :to="{ name: 'ItemDetail', params: { id: item.item_id }}">
+    <router-link :to="{ name: 'item-detail', params: { id: item.item_id }}">
       <div class="card-body py-1">
         <div class="img-wrap text-center py-0 py-lg-3">
           <img :src="item.item_photo" class="img-fluid w-75">
@@ -13,8 +13,8 @@
 
       <div class="div-price">
         <p class="card-text mb-0" v-if="item.item_discount != 0"> 
-          Ks. {{ discountPrice }} <br>
-          <span class="text-muted"><small><del class="pr-2">Ks.{{ item.item_price }}</del>(-{{ item.item_discount }}%)</small></span>
+          {{ discountPrice | currency }} <br>
+          <span class="text-muted"><small><del class="pr-2">{{ item.item_price | currency }}</del>(-{{ item.item_discount }}%)</small></span>
         </p>
         <p class="card-text mb-0" v-else> 
           Ks. {{ item.item_price }}
@@ -23,7 +23,7 @@
     </router-link>
 
       <div class="card-footer bg-white">
-        <button class="btn btn-success btn-block btn-addtocart"><span class="mr-1 mb-2"><b-icon icon="cart2" aria-hidden="true"></b-icon></span> Add to Cart</button>
+        <button class="btn btn-success btn-block btn-addtocart" @click="addToCart()"><span class="mr-1 mb-2"><b-icon icon="cart2" aria-hidden="true"></b-icon></span> Add to Cart</button>
       </div>
 
   </div>
@@ -47,6 +47,15 @@
         if(this.item.item_discount != 0) {
           this.discountPrice = this.item.item_price - (this.item.item_price * this.item.item_discount/100);
         }
+      },
+      addToCart() {
+        let myitem = {};
+        if(this.item.item_discount != 0) {
+          myitem = { id:this.item.item_id, name:this.item.item_name, price:this.discountPrice, qty:1 };
+        } else {
+          myitem = { id:this.item.item_id, name:this.item.item_name, price:+this.item.item_price, qty:1 };
+        }
+        this.$store.dispatch('addToCart', myitem)
       }
     }
   };
