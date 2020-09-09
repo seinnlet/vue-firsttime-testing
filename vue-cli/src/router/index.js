@@ -6,10 +6,6 @@ Vue.use(VueRouter);
 
 // import views
 import Home from "../views/Home.vue";
-import News from "../views/News.vue";
-import Items from "../views/Items.vue";
-import Itemdetail from "../views/ItemDetail.vue";
-import ShoppingCart from "../views/ShoppingCart.vue";
 
 // bootstrap & css
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -25,6 +21,14 @@ Vue.component('b-carousel', BCarousel)
 // animation
 import 'animate.css';
 
+// format date-time 
+import moment from 'moment';
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('DD MMM YYYY, h:mm a')
+  }
+})
+
 const routes = [
   {
     path: "/",
@@ -32,24 +36,29 @@ const routes = [
     component: Home
   }, 
   {
-    path: "/news", 
-    name: "new-list", 
-    component: News
+    path: "/orders", 
+    name: "order-list", 
+    component: () => import(/* webpackChunkName: 'order-list' */ "../views/Orders.vue")
+  }, 
+  {
+    path: "/order/:id", 
+    name: "order-detail", 
+    component: () => import(/* webpackChunkName: 'order-detail' */ "../views/OrderDetail.vue")
   }, 
   {
     path: "/items", 
     name: "item-list", 
-    component: Items
+    component: () => import(/* webpackChunkName: 'item-list' */ "../views/Items.vue")
   },
   { 
     path: '/item/:id',
     name: 'item-detail',
-    component: Itemdetail
+    component: () => import(/* webpackChunkName: 'item-detail' */ "../views/ItemDetail.vue")
   },
   { 
     path: '/cart',
     name: 'cart',
-    component: ShoppingCart
+    component: () => import(/* webpackChunkName: 'cart' */ "../views/ShoppingCart.vue")
   }
 ];
 

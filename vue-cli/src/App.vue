@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <transition mode="out-in" enter-active-class="animate__animated animate__fadeInUp animate__fast" leave-active-class="animate__animated animate__fadeOut animate__faster">
+    <transition mode="out-in" enter-active-class="animate__animated animate__fadeInUp animate__faster">
       <router-view />
     </transition>
   </div>

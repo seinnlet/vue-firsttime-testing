@@ -17,10 +17,10 @@
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'new-list'}" class="nav-link">News Api</router-link>
+              <router-link :to="{name:'item-list'}" class="nav-link">Items</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'item-list'}" class="nav-link">Items</router-link>
+              <router-link :to="{name:'order-list'}" class="nav-link">Order List</router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{name: 'cart'}" class="nav-link pl-0 pl-lg-3">
@@ -30,8 +30,7 @@
                 <sup>
                   <transition
                     mode="out-in"
-                    enter-active-class="animate__animated animate__bounceIn animate__fast"
-                    leave-active-class="animate__animated animate__bounceOut"
+                    enter-active-class="animate__animated animate__heartBeat animate__fast"
                   >
                     <span class="badge badge-pill custom-badge" v-if="cartCount > 0" :key="cartCount">{{ cartCount }}</span>
                 </transition>

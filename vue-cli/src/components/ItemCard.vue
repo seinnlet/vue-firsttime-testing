@@ -17,7 +17,7 @@
           <span class="text-muted"><small><del class="pr-2">{{ item.item_price | currency }}</del>(-{{ item.item_discount }}%)</small></span>
         </p>
         <p class="card-text mb-0" v-else> 
-          Ks. {{ item.item_price }}
+          {{ item.item_price | currency }}
         </p>
       </div>
     </router-link>

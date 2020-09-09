@@ -41,7 +41,7 @@
 					</p>
 
 					<div class="text-right mt-5">
-						<button @click="goBack()" class="btn btn-link link-green"> <b-icon icon="chevron-left" aria-hidden="true" style="font-size:0.9rem"></b-icon> Go Back</button>
+						<button @click="goBack()" class="btn btn-link link-green font-weight-bold"> <b-icon icon="arrow-left-short" aria-hidden="true" style="font-size:0.9rem"></b-icon> Go Back</button>
 					</div>
 				</div>
 			</div>
