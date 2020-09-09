@@ -22,6 +22,9 @@ import 'bootstrap';
 import { BCarousel } from 'bootstrap-vue'
 Vue.component('b-carousel', BCarousel)
 
+// animation
+import 'animate.css';
+
 const routes = [
   {
     path: "/",

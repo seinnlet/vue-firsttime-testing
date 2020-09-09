@@ -27,15 +27,15 @@
                 <span class="d-lg-none pr-2">My Cart</span>
                 <b-icon icon="cart2" aria-hidden="true"></b-icon>
 
-                <transition
-                  name="bounce"
-                  enter-active-class="bounceInLeft"
-                  leave-active-class="bounceOutRight"
-                >
-                  <sup>
-                    <span class="badge badge-pill custom-badge" v-if="cartCount > 0">{{ cartCount }}</span>
-                  </sup>
+                <sup>
+                  <transition
+                    mode="out-in"
+                    enter-active-class="animate__animated animate__bounceIn animate__fast"
+                    leave-active-class="animate__animated animate__bounceOut"
+                  >
+                    <span class="badge badge-pill custom-badge" v-if="cartCount > 0" :key="cartCount">{{ cartCount }}</span>
                 </transition>
+                </sup>
               </router-link>
             </li>
           </ul>
@@ -51,10 +51,7 @@
     computed: {
       cartCount() {
         this.$store.dispatch('getData')
-        
-         return this.$store.state.cart.reduce(function (total, item) {
-          return total + item.qty;
-        }, 0);
+        return this.$store.getters.cartTotalQty;
 
       }
     }

@@ -26,7 +26,7 @@
 	                <th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<transition-group tag="tbody" enter-active-class="animate__animated animate__flipInX animate__faster" leave-active-class="animate__animated animate__flipOutX animate__faster">
 								<tr v-for="(item,index) in cart" :key="index">
 	                <td>{{++index}}.</td>
 	                <td><em>{{item.name}}</em></td>
@@ -41,7 +41,7 @@
 	                	<button class="btn btn-danger rounded-circle" @click="removeFromCart(item.id)" title="Remove"><b-icon icon="x" aria-hidden="true"></b-icon></button>
 	                </td>
 	              </tr>
-							</tbody>
+							</transition-group>
 						</table>
 					</div>
 
@@ -78,7 +78,15 @@
             <hr class="my-4">
 
             <div class="float-left font-weight-bold">Total Price:</div>
-						<div class="float-right font-weight-bold"><big>{{ total | currency }}</big></div>
+            <transition
+              mode="out-in"
+              enter-active-class="animate__animated animate__flipInX animate_faster"
+              leave-active-class="animate__animated animate__flipOutX"
+            >
+	            <div class="float-right font-weight-bold" v-if="total">
+								<big>{{ total | currency }}</big>
+							</div>
+						</transition>
 						<div class="clearfix mb-3"></div>
 
 						<div class="my-4">
