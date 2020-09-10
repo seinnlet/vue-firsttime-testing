@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store.js";
 import {currency} from "@/currency.js";
 
+import './assets/css/style.css';
+
 Vue.config.productionTip = false;
 
 Vue.filter('currency', currency);

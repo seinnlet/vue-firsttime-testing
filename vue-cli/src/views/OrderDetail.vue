@@ -9,7 +9,7 @@
 				
 				<div class="row text-left table-heading">
 					<div class="col-lg-6 mb-4">
-						<strong>Voucher No :</strong> <span class="text-success font-weight-bold">V-{{ order.order_voucherno }}</span><br>
+						<strong>Voucher No :</strong> <span class="text-green font-weight-bold">V-{{ order.order_voucherno }}</span><br>
 						<strong>Ordered By :</strong> {{ order.order_user.user_name }}<br>
 						<strong>Order Date :</strong> {{ order.created_at | formatDate }}
 					</div>
@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<div class="table-responsive mt-2">
-					<table class="table table-order table-bordered">
+					<table class="table table-edited table-bordered">
 						<thead>
 							<tr>
 								<th>No.</th>
@@ -54,7 +54,7 @@
 							<tr>
 								<td><strong>Grand Total:</strong></td>
 								<td class="td-right">
-									<span class="text-success font-weight-bold h6">
+									<span class="text-green font-weight-bold h6">
 										{{ order.order_totalamount | currency }}
 									</span>
 								</td>
@@ -117,33 +117,3 @@
   };
 
 </script>
-
-<style scoped>
-	.table-heading, .table-order th, .table-order td {
-		font-size: .9rem;
-		color: #333;
-	} 
-	.table-heading {
-		line-height: 28px;
-	}
-	.table-order th, .table-order td {
-		text-align: left;
-		vertical-align: middle;
-	}
-	.table-order tr:last-child {
-		border-bottom: 1px solid #dee2e6;
-	}
-	.text-success {
-		color: #41B883;
-	}
-	.td-right {
-		text-align: right !important;
-		padding-right: 20px;
-	}
-	.link-green {
-		color: #42b983;
-	}
-	.link-green:hover {
-		color: #008600;
-	}
-</style>

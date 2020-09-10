@@ -6,7 +6,7 @@
 		<div class="container py-5">
 			
 			<div class="table-responsive">
-				<table class="table table-order table-hover">
+				<table class="table table-edited table-padding-edited table-hover">
 					<thead>
 						<tr>
 							<th>No.</th>
@@ -20,14 +20,14 @@
 						<tr v-for="(order,index) in orders" :key="index">
 							<td>{{ ++index }}.</td>
 							<td>
-								<router-link :to="{name:'order-detail', params: { id: order.order_id }}" class="btn-link text-success">
+								<router-link :to="{name:'order-detail', params: { id: order.order_id }}" class="link-green">
 								O-{{ order.order_voucherno }} <sup><b-icon icon="box-arrow-up-right" aria-hidden="true"></b-icon></sup>
 								</router-link>
 							</td>
 							<td>{{ order.created_at | formatDate }}</td>
 							<td>{{ order.order_user.user_name }}</td>
 							<td>
-								<span v-if="order.order_status == 1" class="badge badge-pill badge-success">Order</span>
+								<span v-if="order.order_status == 1" class="badge badge-pill custom-badge">Order</span>
 							</td>
 						</tr>
 					</tbody>
@@ -63,22 +63,3 @@
 	};
 	
 </script>
-
-<style scoped>
-	
-	.table-order th, .table-order td {
-		text-align: left !important;
-		vertical-align: middle;
-	}
-	.table-order td {
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-	.table-order tr:last-child {
-		border-bottom: 1px solid #dee2e6;
-	}
-	.text-success {
-		color: #41B883;
-	}
-
-</style>

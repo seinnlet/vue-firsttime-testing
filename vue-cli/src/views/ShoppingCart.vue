@@ -29,30 +29,30 @@
 						<div class="col-lg-8">
 							
 							<div class="table-responsive mb-4">
-								<table class="table table-hover table-cart">
+								<table class="table table-edited table-padding-edited">
 									<thead>
 										<tr>
 											<th>No.</th>
 			                <th>Name</th>
-			                <th>Qty</th>
 			                <th>Unit_Price</th>
+			                <th>Qty</th>
 			                <th>Sub_Total</th>
 			                <th></th>
 										</tr>
 									</thead>
 									<transition-group tag="tbody" enter-active-class="animate__animated animate__flipInX animate__faster" leave-active-class="animate__animated animate__flipOutX animate__faster">
-										<tr v-for="(item,index) in cart" :key="index">
+										<tr v-for="(item,index) in cart" :key="item.id">
 			                <td>{{++index}}.</td>
 			                <td><em>{{item.name}}</em></td>
+			                <td>{{item.price | currency}}</td>
 			                <td style="min-width:120px">
 			                  <button class="btn btn-qty ripple" @click="decreaseQty(item.id)"><b-icon icon="dash" aria-hidden="true"></b-icon></button>
 			                  <span class="span-qty">{{item.qty}}</span>
 			                 <button class="btn btn-qty ripple" @click="increaseQty(item.id)"><b-icon icon="plus" aria-hidden="true"></b-icon></button>
 			                </td>
-			                <td>{{item.price | currency}}</td>
 			                <td>{{(item.price*item.qty) | currency}}</td>
 			                <td>
-			                	<button class="btn btn-danger rounded-circle" @click="removeFromCart(item.id)" title="Remove"><b-icon icon="x" aria-hidden="true"></b-icon></button>
+			                	<button class="btn btn-remove rounded-circle" @click="removeFromCart(item.id)" title="Remove"><b-icon icon="x" aria-hidden="true"></b-icon></button>
 			                </td>
 			              </tr>
 									</transition-group>
@@ -62,7 +62,7 @@
 							<textarea placeholder="Add any comment to your order..." class="form-control" rows="4" v-model="note"></textarea>
 
 							<p class="my-5 text-left">
-								<router-link :to="{name:'item-list'}" class="link-green">Continue Shopping <b-icon icon="arrow-right-short" aria-hidden="true"></b-icon></router-link>
+								<router-link :to="{name:'item-list'}" class="link-green font-weight-bold">Continue Shopping <b-icon icon="arrow-right-short" aria-hidden="true"></b-icon></router-link>
 							</p>
 
 						</div>
@@ -108,7 +108,7 @@
 								<div class="clearfix mb-3"></div>
 
 								<div class="my-4">
-									<button :disabled="!this.selectedShippingOption" class="btn btn-success btn-block btn-green" @click="order()">Check Out</button>
+									<button :disabled="!this.selectedShippingOption" class="btn btn-gradient-green btn-block" @click="order()"><big>Check Out</big></button>
 								</div>
 
 							</div>
@@ -205,70 +205,3 @@
 	};
 
 </script>
-
-<style scoped>
-	
-	.table-cart th, .table-cart td {
-		text-align: left !important;
-		font-size: .85rem;
-		vertical-align: middle;
-	}
-	.table-cart td {
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-	.table-cart tr:last-child {
-		border-bottom: 1px solid #dee2e6;
-	}
-
-	.div-ordersummary, .div-ordersummary .form-control, textarea {
-		font-size: .9rem;
-	}
-
-	/* minus plus */
-	.btn-qty {
-		padding: 0.125rem 0.25rem;
-		background-color: #f7f7f7;
-		font-size: .75rem;
-	}
-	.btn-danger {
-		padding: 0.2rem 0.25rem 0.05rem;
-		font-size: .75rem;
-		background-color: #E9625E;
-		border: none;
-	}
-	.span-qty {
-		display: inline-block;
-		width: 35px;
-		text-align: center;
-	}
-	.ripple {
-	  background-position: center;
-	  transition: background 0.8s;
-	}
-	.ripple:hover {
-	  background: #f7f7f7 radial-gradient(circle, transparent 1%, #f7f7f7 1%) center/15000%;
-	}
-	.ripple:active {
-	  background-color: #ddd;
-	  background-size: 100%;
-	  transition: background 0s;
-	}
-	.ripple:focus {
-		box-shadow: none !important;
-	}
-
-	.btn-green {
-	  color: #f7f7f7;
-	  background-image: linear-gradient(15deg, #42b983 0%, #80d0c7 100%);
-	  border: none;
-	  transition: background-image .3s ease;
-	}
-	.btn-green:hover {
-	  background-image: linear-gradient(30deg, #42b983 80%, #80d0c7 100%);
-	}
-	.link-green {
-		color: #42b983;
-		font-weight: bold;
-	}
-</style>

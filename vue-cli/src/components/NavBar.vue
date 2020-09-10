@@ -12,7 +12,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link to="/" class="nav-link">Home</router-link>
             </li>
@@ -56,32 +56,3 @@
     }
   };
 </script>
-
-<style> 
-#nav {
-  margin-bottom: 40px;
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  box-shadow: 2px 0 5px -2px #888;
-  padding-right: 5%;
-  padding-left: 5%;
-}
-
-#nav a.nav-link {
-  color: #667489;
-}
-
-#nav a.router-link-exact-active {
-  color: #41B883;
-  font-weight: bold;
-}
-
-#nav a.router-link-exact-active span {
-  color: #2c3e50;
-}
-
-.custom-badge {
-  color: #fff !important;
-  background-color: #41B883;
-}
-
-</style>

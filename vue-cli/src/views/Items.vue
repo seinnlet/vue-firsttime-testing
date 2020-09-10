@@ -5,7 +5,7 @@
 
 		<div class="container">
 			<div class="row my-5">
-	      <div class="col-6 col-md-4 col-lg-3 mb-5" v-for="(item,index) in items" :key="index">
+	      <div class="col-6 col-lg-4 col-xl-3 mb-5" v-for="(item,index) in items" :key="index">
 	        <ItemCard :item="item"></ItemCard>
 	      </div>
 	    </div>
