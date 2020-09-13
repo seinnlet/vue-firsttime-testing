@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
 	
-	import OrderService from '@/services/OrderService.js';
+	import OrderService from '@/services/services.js';
 
 	export default{
     data (){
@@ -97,7 +97,7 @@
         OrderService.getOrder(id)
             .then(res => {
               this.order = res.data.order 
-              console.log(res.data.order)
+              // console.log(res.data.order)
               this.total = res.data.order.order_items.reduce((total, item) => {
 										        return total + item.item_price * item.qty
 										      }, 0)

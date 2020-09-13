@@ -20,7 +20,7 @@
 						<tr v-for="(order,index) in orders" :key="index">
 							<td>{{ ++index }}.</td>
 							<td>
-								<router-link :to="{name:'order-detail', params: { id: order.order_id }}" class="link-green">
+								<router-link :to="{name:'order-detail', params: { id: order.order_id }}" class="link-green font-weight-bold">
 								O-{{ order.order_voucherno }} <sup><b-icon icon="box-arrow-up-right" aria-hidden="true"></b-icon></sup>
 								</router-link>
 							</td>
@@ -42,7 +42,7 @@
 
 <script type="text/javascript">
 
-	import OrderService from '@/services/OrderService.js';
+	import OrderService from '@/services/services.js';
 
 	export default {
 		data (){
@@ -54,7 +54,6 @@
       OrderService.getOrders()
           .then(res => {
             this.orders = res.data.orders
-
           })
           .catch(err => {
             console.log('There was an error:',err.response)

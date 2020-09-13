@@ -1,6 +1,6 @@
 <template>
 	
-	<div id="nav">
+	<div id="nav" class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-light">
 
         <router-link to="/" class="navbar-brand">
@@ -20,10 +20,7 @@
               <router-link :to="{name:'item-list'}" class="nav-link">Items</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'order-list'}" class="nav-link">Order List</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{name: 'cart'}" class="nav-link pl-0 pl-lg-3">
+              <router-link :to="{name: 'cart'}" class="nav-link">
                 <span class="d-lg-none pr-2">My Cart</span>
                 <b-icon icon="cart2" aria-hidden="true"></b-icon>
 
@@ -37,6 +34,19 @@
                 </sup>
               </router-link>
             </li>
+            <li class="nav-item dropdown" v-if="isLoggedIn">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{authUser.name}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <router-link :to="{name:'order-list'}" class="dropdown-item">Order List</router-link>
+                <div class="dropdown-divider"></div>
+                <a @click="logout()" class="dropdown-item" href="#">Log Out</a>
+              </div>
+            </li>
+            <li class="nav-item" v-else>
+              <router-link :to="{name:'login'}" class="btn-login shadow-sm">Log In</router-link>
+            </li>
           </ul>
         </div>
         
@@ -46,12 +56,40 @@
 </template>
 
 <script type="text/javascript">
+  import Swal from 'sweetalert2'
+
   export default {
+    methods:{
+      logout(){
+        Swal.fire({
+            title: 'Do you want to Log Out?',
+            text: '',
+            icon: 'question',
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Log Out',
+            confirmButtonColor: '#E9625E',
+            showCloseButton: true,
+            allowEscapeKey: true,
+            focusConfirm: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.$store.dispatch('logout')
+              this.$router.push('/')
+            }
+          })
+      }
+    },
     computed: {
       cartCount() {
         this.$store.dispatch('getData')
         return this.$store.getters.cartTotalQty;
-
+      },
+      isLoggedIn() { 
+        return this.$store.getters.isLoggedIn
+      },
+      authUser(){
+        return this.$store.state.user
       }
     }
   };

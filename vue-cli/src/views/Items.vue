@@ -5,7 +5,7 @@
 
 		<div class="container">
 			<div class="row my-5">
-	      <div class="col-6 col-lg-4 col-xl-3 mb-5" v-for="(item,index) in items" :key="index">
+	      <div class="col-sm-6 col-lg-4 col-xl-3 mb-5" v-for="(item,index) in items" :key="index">
 	        <ItemCard :item="item"></ItemCard>
 	      </div>
 	    </div>
@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 	import ItemCard from '@/components/ItemCard.vue';
-  import ItemService from '@/services/ItemService.js';
+  import ItemService from '@/services/services.js';
 
 
 	export default {

@@ -12,26 +12,90 @@ footer {
   font-size: .85rem;
   letter-spacing: 0.3px;
 }
+a:hover {
+  text-decoration: none !important;
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
 /* NAV */
 #nav {
   margin-bottom: 40px;
-  background-color: #fdfbfb;
-  background-image: linear-gradient(315deg, #fdfbfb 0%, #f7fcfa 74%);
+  background-color: #fff;
   box-shadow: 2px 0 5px -2px #888;
   padding-right: 5%;
   padding-left: 5%;
 }
 #nav a.nav-link {
   color: #667489;
-  padding-left: 20px;
-  padding-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
 }
-#nav a.router-link-exact-active {
+#nav a.nav-link:after  {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #41B883;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+#nav a.nav-link:hover:after { 
+  width: 100%; 
+  left: 0; 
+}
+#nav a.dropdown-toggle {
+  margin-right: 0;
+  color: #2c3e50;
+  font-weight: bold;
+}
+#nav a.dropdown-toggle:after {
+  display: inline-block;
+  left: 0;
+  position: relative;
+  background: #fff;
+}
+#nav a.dropdown-toggle:hover:after {
+  width: 0; 
+}
+#nav a.nav-link.router-link-exact-active {
   color: #41B883;
   font-weight: bold;
 }
-#nav a.router-link-exact-active span {
-  color: #2c3e50;
+#nav .dropdown-item.active {
+  color: #41B883;
+  background-color: #fff;
+}
+#nav .dropdown-item:active {
+  background-color: #41B883;
+}
+#nav .btn-login {
+  display: block;
+  padding: 0.4rem 1.5rem;
+  color: #f7f7f7 !important;
+  margin-left: 20px;
+  font-size: .88rem;
+  margin-top: .1rem;
+  background-image: linear-gradient(to right, #41B883 0%, #00CDAC 51%, #0a8f54 100%);
+  background-size: 200% auto;
+  border-radius: 1.2rem;
+  font-weight: bold;
+  transition: background .3s ease;
+}
+#nav .btn-login:hover {
+  text-decoration: none;
+  background-position: right center;
+}
+@media only screen and (max-width: 992px) {
+  #nav a.nav-link, #nav .btn-login {
+    margin: 15px 20px;
+    padding: 0.5rem 1.5rem;
+  }
 }
 .custom-badge {
   color: #fff !important;
@@ -44,7 +108,7 @@ footer {
   background-image: linear-gradient(15deg, #42b983 0%, #80d0c7 100%);
   border: none;
   transition: all .3s ease;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transform: scale(1);
 }
 .btn-gradient-green:hover {
@@ -52,7 +116,7 @@ footer {
 }
 .btn-gradient-green:enabled:hover {
   color: #f7f7f7;
-  background-image: linear-gradient(30deg, #42b983 80%, #80d0c7 100%);
+  background-image: linear-gradient(30deg, #41B883 80%, #80d0c7 100%);
 }
 .btn-gradient-green:enabled:active {
   color: #fff;
@@ -77,7 +141,7 @@ footer {
 }
 .link-green:hover {
   color: #65b893;
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .table-edited th, .table-edited td {
@@ -237,3 +301,14 @@ footer {
   width: 35px;
   text-align: center;
 }
+
+/* MATERIAL */
+.md-input {
+  border-bottom: 1px solid #aaa !important;
+}
+.md-field.md-theme-default:before {
+  background-color: #41B883;
+}
+.md-field.md-has-password .md-toggle-password svg {
+  opacity: 0.5
+ }

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import store from "../store.js";
 
 // vue router
 import VueRouter from "vue-router";
@@ -6,28 +7,6 @@ Vue.use(VueRouter);
 
 // import views
 import Home from "../views/Home.vue";
-
-// bootstrap & css
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-// bootstrap js
-import 'bootstrap';
-import { BCarousel } from 'bootstrap-vue'
-Vue.component('b-carousel', BCarousel)
-
-// animation
-import 'animate.css';
-
-// format date-time 
-import moment from 'moment';
-Vue.filter('formatDate', function(value) {
-  if (value) {
-    return moment(String(value)).format('DD MMM YYYY, h:mm a')
-  }
-})
 
 const routes = [
   {
@@ -38,12 +17,18 @@ const routes = [
   {
     path: "/orders", 
     name: "order-list", 
-    component: () => import(/* webpackChunkName: 'order-list' */ "../views/Orders.vue")
+    component: () => import(/* webpackChunkName: 'order-list' */ "../views/Orders.vue"),
+    meta:{
+      requiresAuth: true,
+    }
   }, 
   {
     path: "/order/:id", 
     name: "order-detail", 
-    component: () => import(/* webpackChunkName: 'order-detail' */ "../views/OrderDetail.vue")
+    component: () => import(/* webpackChunkName: 'order-detail' */ "../views/OrderDetail.vue"),
+    meta:{
+      requiresAuth: true
+    }
   }, 
   {
     path: "/items", 
@@ -59,6 +44,20 @@ const routes = [
     path: '/cart',
     name: 'cart',
     component: () => import(/* webpackChunkName: 'cart' */ "../views/ShoppingCart.vue")
+  },
+  { 
+    path: '/register',
+    name: 'register',
+    component: () => import(/* webpackChunkName: 'register' */ "../views/Register.vue")
+  },
+  { 
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: 'cart' */ "../views/Login.vue")
+  },
+  {
+    path: "*",
+    component: () => import("../views/PageNotFound.vue")
   }
 ];
 
@@ -67,5 +66,17 @@ const router = new VueRouter({
   mode: 'history',  // abstract
   linkActiveClass: "active", // active class for non-exact links.
 });
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login')
+  }else{
+    next()
+  }
+})
 
 export default router;

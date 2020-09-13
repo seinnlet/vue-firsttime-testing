@@ -5,7 +5,7 @@
 		<div class="container my-5">
 
 			<section v-if="orderDone" class="my-3">
-				<div class="shadow text-success py-5 animate__animated animate__zoomIn animate__fast w-75 mx-auto rounded">
+				<div class="shadow text-green py-5 animate__animated animate__zoomIn animate__fast w-75 mx-auto rounded">
 	      	<div class="mr-2 animate__animated animate__heartBeat"><b-icon icon="check2-circle" aria-hidden="true" font-scale="3"></b-icon></div> 
 		      <h5 class="font-weight-bold mt-3">
 			      Order Completed Successfully!
@@ -20,7 +20,7 @@
 	    	<transition mode="out-in" enter-active-class="animate__animated animate__fadeInUp animate__faster">
 					<div v-show="!cart.length">
 						<p class="mb-4"><i>Please add some products to shopping cart.</i></p>
-						<router-link :to="{name:'item-list'}" class="btn btn-success btn-green px-4">View All Items</router-link>
+						<router-link :to="{name:'item-list'}" class="btn btn-gradient-green px-4">View All Items</router-link>
 					</div>
 				</transition>
 				
@@ -124,7 +124,8 @@
 </template>
 
 <script type="text/javascript">
-	import OrderService from '@/services/OrderService.js'
+	import OrderService from '@/services/services.js'
+	import Swal from 'sweetalert2'
 	
 	export default {
 		data(){
@@ -178,7 +179,22 @@
 		},
 		methods: {
       removeFromCart(itemId) {
-        this.$store.dispatch('removeFromCart', itemId)
+      	Swal.fire({
+					  title: 'Are you Sure to Remove?',
+					  text: '',
+					  icon: 'error',
+					  showConfirmButton: true,
+					  showCancelButton: true,
+					  allowEscapeKey: true,
+					  focusConfirm: false,
+						confirmButtonColor: '#E9625E',
+					  showCloseButton: true
+					}).then((result) => {
+						if (result.isConfirmed) {
+			        this.$store.dispatch('removeFromCart', itemId)
+						}
+					})
+        
       }, 
       increaseQty(itemId) {
       	this.$store.dispatch('increaseQty', itemId)
@@ -187,19 +203,36 @@
       	this.$store.dispatch('decreaseQty', itemId)
       },
       order(){
-        let data = {cart_data: JSON.stringify(this.$store.state.cart),
-                  note: this.note, shippingmethod: this.selectedShippingOption.method, shippingfees: this.shippingfees, totalamount: this.total};
+      	if(this.$store.getters.isLoggedIn) {
+      		let data = {cart_data: JSON.stringify(this.$store.state.cart),
+	                  note: this.note, shippingmethod: this.selectedShippingOption.method, shippingfees: this.shippingfees, totalamount: this.total};
 
-        OrderService.createOrder(data)
-        .then(response => {
-          console.log(response)
-          localStorage.clear();
-          this.orderDone = 1;
-          this.$store.dispatch('getData')
-        })
-        .catch(error => {
-          console.log('There was an error:',error.response)
-        })
+	        OrderService.createOrder(data)
+	        .then(response => {
+	          console.log(response)
+	          localStorage.clear();
+	          this.orderDone = 1;
+	          this.$store.dispatch('getData')
+	        })
+	        .catch(error => {
+	          console.log('There was an error:',error.response)
+	        })
+      	} else {
+      		Swal.fire({
+					  title: 'Log in Required!',
+					  text: 'Please log in to continue.',
+					  icon: 'question',
+					  showConfirmButton: true,
+						confirmButtonColor: '#41B883',
+					  showCloseButton: true,
+					  allowEscapeKey: true,
+					}).then((result) => {
+						if (result.isConfirmed) {
+			        this.$router.push('/login');
+						}
+					})
+      	}
+	        
       }
     }
 	};

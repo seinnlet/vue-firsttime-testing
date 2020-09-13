@@ -53,7 +53,7 @@
 
 <script type="text/javascript">
 
-  import ItemService from '@/services/ItemService.js';
+  import ItemService from '@/services/services.js';
 
   export default{
     data (){
