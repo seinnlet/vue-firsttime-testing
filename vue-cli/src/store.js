@@ -122,7 +122,8 @@ const store = new Vuex.Store({
               username: user.username,
               password: user.password
           };
-          axios.post('http://localhost:8001/oauth/token', data)
+          // axios.post('http://localhost:8001/oauth/token', data)
+          axios.post('http://osapi.seinnletlethninn.me/oauth/token', data)
               .then(res => {
                   const token = res.data.access_token;
                   localStorage.setItem('token', token);
@@ -142,7 +143,8 @@ const store = new Vuex.Store({
     },
     getUser(state){
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8001/api/user')
+        // axios.get('http://localhost:8001/api/user')
+        axios.get('http://osapi.seinnletlethninn.me/api/user')
         .then(res => {
             state.commit('storeUserData', res.data);
             resolve(res);

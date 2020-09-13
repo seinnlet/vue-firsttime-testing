@@ -65,7 +65,13 @@
 				let user = {username: this.email, password:this.password};
 
 				this.$store.dispatch('login',user)
-          .then(() => this.$router.push('/orders'))
+          .then(() => {
+          	if (!this.$store.getters.cartTotalQty) {
+	          	this.$router.push('/orders')
+          	} else {
+          		this.$router.push('/cart')
+          	}
+          })
           .catch(err => {
               console.log('There was an error:',err.response)
               this.errorMessage = 'Login Failed!, Incorrect Email and Password'
