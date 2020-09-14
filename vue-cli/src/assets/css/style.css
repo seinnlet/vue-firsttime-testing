@@ -159,6 +159,12 @@ a:hover {
 .table-hover tbody tr:hover {
   background-color: #efefef;
 }
+tbody .md-table-row td {
+  text-align: left;
+  font-size: .9rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
 /* RIPPLE EFFECT */
 .ripple {
